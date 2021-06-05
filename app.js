@@ -42,7 +42,12 @@ client.on('message', (message) => {
     }
 
     let filter = m => m.author.id === message.author.id
-    message.channel.send('Which timezone would you like to use? ' + result.timezones.split(",").join("/n")).then(() => {
+    var timezones = result.timezones
+    var out = "";
+    for (var i = 0; i<timezones.length; i++){
+      out = out + "\n" + (i+1) +"- "+timezones[i]
+    }
+    message.channel.send('Which timezone would you like to use? ' + out).then(msg => {
       message.channel.awaitMessages(filter, {
           max: 1,
           time: 30000,
@@ -62,11 +67,16 @@ client.on('message', (message) => {
           var formatedCurrentTime = moment.tz(currentTime, "America/Chicago").format('DD/MM/YYYY HH:mm')
           var newTimeZone = result.timezones[message.content-1]
           var newTime = moment.tz(currentTime, newTimeZone).format('DD/MM/YYYY HH:mm') //format it to the new timezone
-          message.channel.send("Current time CST (Texas and stuff): " + formatedCurrentTime + "\ncurrent time " + newTimeZone + ": " + newTime)
+          message.channel.send("Current time CST (Texas and stuff): " + formatedCurrentTime + "\ncurrent time " + newTimeZone + ": " + newTime).then(()=>{
+            message.delete()
+            msg.delete()
+          })
+        
         })
         .catch(collected => {
             console.log(collected)
             message.channel.send('Timeout');
+            msg.delete()
         });
     })
 });
