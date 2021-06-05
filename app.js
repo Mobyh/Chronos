@@ -42,7 +42,7 @@ client.on('message', (message) => {
     
     if(command === "time")
     var result = findNestedObj(countries , "name" ,args.join(" "))
-    if(result === null){
+    if(!result){
       return
     }
 
