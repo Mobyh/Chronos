@@ -8,16 +8,21 @@ const prefix = "?";
 //Country stuff
 const countries = ct.getAllCountries();
 
-function findNestedObj(entireObj, keyToFind, valToFind) {
+function findNestedObj(entireObj, keyToFind, valToFind){
+  try{  
     let foundObj;
-    JSON.stringify(entireObj, (_, nestedValue) => {
-      if (nestedValue && nestedValue[keyToFind] === valToFind) {
-        foundObj = nestedValue;
-      }
-      return nestedValue;
-    });
-    return foundObj;
-  };
+      JSON.stringify(entireObj, (_, nestedValue) => {
+        if (nestedValue && nestedValue[keyToFind] === valToFind) {
+          foundObj = nestedValue;
+        }
+        return nestedValue;
+      });
+      return foundObj;
+  }
+  catch(err){
+    return null;
+  }
+};
 
 
 //Discord Stuff
