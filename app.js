@@ -58,9 +58,8 @@ client.on('message', (message) => {
             return
           }
           else
-          var currentTime = moment().format() //get current time
-          currentTime = moment.tz(currentTime, "America/Chicago").format()
-          var formatedCurrentTime = moment().format('DD/MM/YYYY HH:mm')
+          var currentTime = moment().format() //get current time from heroku
+          var formatedCurrentTime = moment.tz(currentTime, "America/Chicago").format('DD/MM/YYYY HH:mm')
           var newTimeZone = result.timezones[message.content-1]
           var newTime = moment.tz(currentTime, newTimeZone).format('DD/MM/YYYY HH:mm') //format it to the new timezone
           message.channel.send("Current time CST (Texas and stuff): " + formatedCurrentTime + "\ncurrent time " + newTimeZone + ": " + newTime)
