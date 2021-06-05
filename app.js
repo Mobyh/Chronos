@@ -40,7 +40,10 @@ client.on('message', (message) => {
     const command = args.shift().toLowerCase();
     
     if(command === "time")
-    var result = findNestedObj(countries , "name" ,args[0])
+    var result = findNestedObj(countries , "name" ,args.join(" "))
+    if(result === null){
+      return
+    }
 
     let filter = m => m.author.id === message.author.id
     message.channel.send('Which timezone would you like to use? ' + result.timezones).then(() => {
