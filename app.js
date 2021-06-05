@@ -5,10 +5,6 @@ var _ = require('lodash');
 require('dotenv').config();
 const prefix = "?";
 
-//TimeZone Stuff
-const defaultTimeZone = moment.tz.guess();
-const timeZonesList = moment.tz.names();
-
 //Country stuff
 const countries = ct.getAllCountries();
 
@@ -63,6 +59,7 @@ client.on('message', (message) => {
           }
           else
           var currentTime = moment().format() //get current time
+          currentTime = moment.tz(currentTime, "America/Chicago").format()
           var formatedCurrentTime = moment().format('DD/MM/YYYY HH:mm')
           var newTimeZone = result.timezones[message.content-1]
           var newTime = moment.tz(currentTime, newTimeZone).format('DD/MM/YYYY HH:mm') //format it to the new timezone
