@@ -12,7 +12,7 @@ function findNestedObj(entireObj, keyToFind, valToFind){
   try{  
     let foundObj;
       JSON.stringify(entireObj, (_, nestedValue) => {
-        if (nestedValue.toLowerCase() && nestedValue[keyToFind].toLowerCase() === valToFind.toLowerCase()) {
+        if (nestedValue && nestedValue[keyToFind] === valToFind) {
           foundObj = nestedValue;
         }
         return nestedValue;
