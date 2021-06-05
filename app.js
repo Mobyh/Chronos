@@ -42,7 +42,7 @@ client.on('message', (message) => {
     }
 
     let filter = m => m.author.id === message.author.id
-    message.channel.send('Which timezone would you like to use? ' + result.timezones).then(() => {
+    message.channel.send('Which timezone would you like to use? ' + result.timezones.split(",").join("/n")).then(() => {
       message.channel.awaitMessages(filter, {
           max: 1,
           time: 30000,
